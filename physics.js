@@ -1,57 +1,68 @@
+const quizContainer = document.getElementById('quiz-container');
+const quizQuestion = document.getElementById('quiz-question');
+const quizOptions = document.getElementById('quiz-options');
+const submitBtn = document.getElementById('submit-btn');
+const quizFeedback = document.getElementById('quiz-feedback');
 
-        // JavaScript for handling the quiz logic and toast notifications
+const quizData = [
+    {
+        question: 'What is referred to as the maximum displacement of a particle?',
+        options: ['Frequency', 'Amplitude', 'Wavelength'],
+        answer: 'Amplitude'
+    },
+    {
+        question: 'What is the unit of electric current?',
+        options: ['Volt', 'Ampere', 'Ohm'],
+        answer: 'Ampere'
+    },
+    // Add more quiz questions here
+];
 
-        const questions = [
-            {
-                question: "What is the capital of France?",
-                options: ["Paris", "London", "Rome"],
-                answer: "Paris"
-            },
-            {
-                question: "What is the capital of Germany?",
-                options: ["Berlin", "Madrid", "Vienna"],
-                answer: "Berlin"
-            },
-            {
-                question: "What is the capital of Italy?",
-                options: ["Rome", "Paris", "Berlin"],
-                answer: "Rome"
-            }
-        ];
+let currentQuizIndex = 0;
 
-        let currentQuestionIndex = 0;
+function displayQuiz() {
+    const currentQuiz = quizData[currentQuizIndex];
+    quizQuestion.textContent = currentQuiz.question;
+    quizOptions.innerHTML = '';
 
-        const form = document.getElementById('quiz-form');
-        const questionElement = document.getElementById('question');
-        const toastElement = document.getElementById('toast');
+    currentQuiz.options.forEach(option => {
+        const optionElement = document.createElement('div');
+        optionElement.classList.add('quiz-option');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const selectedOption = form.elements['capital'].value;
-            const correctAnswer = questions[currentQuestionIndex].answer;
+        const radioInput = document.createElement('input');
+        radioInput.type = 'radio';
+        radioInput.name = 'quiz-option';
+        radioInput.value = option;
 
-            showToast(selectedOption === correctAnswer ? "Correct!" : "Wrong!");
+        const label = document.createElement('label');
+        label.textContent = option;
 
-            if (selectedOption === correctAnswer) {
-                currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-                setTimeout(loadNextQuestion, 3000); // Load next question after 3 seconds
-            }
-        });
+        optionElement.appendChild(radioInput);
+        optionElement.appendChild(label);
+        quizOptions.appendChild(optionElement);
+    });
+}
 
-        function showToast(message) {
-            toastElement.textContent = message;
-            toastElement.className = "show";
-            setTimeout(function() {
-                toastElement.className = toastElement.className.replace("show", "");
-            }, 3000);
+function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="quiz-option"]:checked');
+    if (selectedOption) {
+        const currentQuiz = quizData[currentQuizIndex];
+        if (selectedOption.value === currentQuiz.answer) {
+            quizFeedback.textContent = 'Correct!';
+        } else {
+            quizFeedback.textContent = 'Wrong answer. Try again!';
         }
-
-        function loadNextQuestion() {
-            const nextQuestion = questions[currentQuestionIndex];
-            questionElement.textContent = nextQuestion.question;
-            form.innerHTML = nextQuestion.options.map((option, index) => `
-                <input type="radio" id="option${index}" name="capital" value="${option}">
-                <label for="option${index}">${option}</label><br>
-            `).join('') + '<button type="submit">Submit</button>';
+        currentQuizIndex++;
+        if (currentQuizIndex < quizData.length) {
+            setTimeout(displayQuiz, 1000);
+        } else {
+            quizFeedback.textContent = 'You have completed the quiz!';
         }
-    </script>
+    } else {
+        quizFeedback.textContent = 'Please select an option.';
+    }
+}
+
+displayQuiz();
+
+submitBtn.addEventListener('click', checkAnswer);

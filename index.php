@@ -117,6 +117,12 @@
                             </div>
                         </section>
 
+                    </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+                    
+
             <!--==================== ABOUT ====================-->
             <section class="section about" id="about">
                 <h2 class="section__title">About</h2>
@@ -285,6 +291,6 @@
         <script src="assets/js/swiper-bundle.min.js"></script>
         
         <!--=============== MAIN JS ===============-->
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/main2.js"></script>
     </body>
 </html>

@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
         <!--=============== SWIPER CSS ===============--> 
-        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="css/swiper-bundle.min.css">
 
         <!--=============== CSS ===============--> 
         <link rel="stylesheet" href="styles.css">
@@ -43,6 +43,9 @@
                         </li>
 
                         <a href="#quiz" class="button button--ghost">Quizzes & Puzzles</a>
+                        
+                        <a href="create.php" class="button button--ghost">Create Virtual Reality</a>
+
                     </ul>
 
                     <div class="nav__close" id="nav-close">
@@ -122,6 +125,11 @@
                             </div>
                         </section>
 
+                    </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
             <!--==================== ABOUT ====================-->
             <section class="section about" id="about">
                 <h2 class="section__title">Other</h2>
@@ -182,19 +190,20 @@
 
         
             <!--==================== OUR NEWSLETTER ====================-->
+              <script src="physics.js"></script>
             <section class="section newsletter"  id="quiz">
-                <div class="newsletter__container container">
+                <div class="newsletter__container container"id="quiz-container">
                     <h2 class="section__title">Our Quizzes and puzzles</h2>
-                    <p class="newsletter__description">
+                    <p class="newsletter__description" >
                        Quizzes and puzzles directly to your inbox
                     </p>
 
                     <form id="quiz-form">
-                <p>What is referred to as the maximum displacement of a particle?</p>
-                <div class="quiz-option">
-                    <input type="radio" id="frequency" name="capital" value="Frequency">
-                    <label for="frequency">Frequency</label>
-                </div>
+                    <p id="quiz-question">What is referred to as the maximum displacement of a particle?</p>
+                    <div class="quiz-option">
+                        <input type="radio" id="frequency" name="capital" value="Frequency">
+                        <label for="frequency">Frequency</label>
+                    </div>
                 <div class="quiz-option">
                     <input type="radio" id="amplitude" name="capital" value="Amplitude">
                     <label for="amplitude">Amplitude</label>
@@ -203,9 +212,14 @@
                     <input type="radio" id="wavelength" name="capital" value="Wavelength">
                     <label for="wavelength">Wavelength</label>
                 </div>
-                <center><button class="button" type="submit">Submit</button></center>
-            </form>
+
+                <div id="quiz-container">
+                    <p id="quiz-question"></p>
+                    <div id="quiz-options"></div>
+                    <center><button class="button" id="submit-btn">Submit</button></center>
+                </div>
             <div id="quiz-feedback"></div>
+            </form>
         </div>
     </section>
 
@@ -274,8 +288,6 @@
 
                 <span class="footer__copy">&#169; Physics hub. All rigths reserved</span>
 
-                <img src="assets/img/footer1-img.png" alt="" class="footer__img-one">
-                <img src="assets/img/footer2-img.png" alt="" class="footer__img-two">
             </footer>
 
             <!--=============== SCROLL UP ===============-->
@@ -290,6 +302,8 @@
         <script src="assets/js/swiper-bundle.min.js"></script>
         
         <!--=============== MAIN JS ===============-->
-        <script src="assets/js/main.js"></script>
+        <script src="assets/js/main2.js"></script>
+
+  
     </body>
 </html>
